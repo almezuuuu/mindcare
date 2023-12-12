@@ -7,10 +7,12 @@ if (!empty($users)) {
                 <td><?= $k + 1 . '.' ?></td>
                 <td><?= ucwords($val->fname) . ' ' . substr(ucwords($val->mname), 0, 1) . '. ' . ucwords($val->lname) ?></td>
                 <td><?= $val->email ?></td>
+                <td class="text-center"><?= $val->contact_num ?></td>
                 <td class="text-center"><?= $val->sex ?></td>
+                <td class="text-center"><?= $val->dpt ?></td>
                 <td class="text-center"><?= $val->yearSection ?></td>
                 <td class="text-center">
-                    <button class="btn btn-primary edit-btn" style="color: white;" data-id="<?= $val->ID ?>" data-fname="<?= $val->fname ?>" data-mname="<?= $val->mname ?>" data-lname="<?= $val->lname ?>" data-uname="<?= $val->username ?>" data-course="<?= $val->yearSection ?>" data-email="<?= $val->email ?>"><i class="fas fa-pen"></i> Edit</button>
+                    <button class="btn btn-primary edit-btn" style="color: white;" data-id="<?= $val->ID ?>" data-fname="<?= $val->fname ?>" data-mname="<?= $val->mname ?>" data-lname="<?= $val->lname ?>" data-uname="<?= $val->username ?>" data-course="<?= $val->yearSection ?>" data-email="<?= $val->email ?>" data-cnum="<?= $val->contact_num ?>" data-dpt="<?= $val->dpt ?>"><i class="fas fa-pen"></i> Edit</button>
                     <button class="btn btn-danger btn-reset" style="color: white;"><i class="fas fa-exclamation-triangle"></i> Reset </button>
                 </td>
             </tr>

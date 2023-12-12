@@ -37,7 +37,9 @@ main_header(['user_mgmt']);
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th class="text-center">Contact Number</th>
                                             <th class="text-center">Gender</th>
+                                            <th class="text-center">Department</th>
                                             <th class="text-center">Course/Yr/Section</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
@@ -98,6 +100,10 @@ main_header(['user_mgmt']);
                                         <span class="input-group-text">Username:</span>
                                         <input type="text" name="uname" class="form-control" id="uname" maxlength="7" required>
                                     </div>
+                                    <div class="input-group mt-2">
+                                        <span class="input-group-text">Contact Number:</span>
+                                        <input type="text" name="cnum" class="form-control" id="cnum" maxlength="7" required>
+                                    </div>
                                 </div>
                                 <div class="col-2 pt-4 text-center">
                                     <label for="gender">Gender :</label>
@@ -126,7 +132,23 @@ main_header(['user_mgmt']);
                                         <option value="3">Secretary</option>
                                     </select>
                                 </div>
-                                <div class="col-8 text-right mt-2">
+                                <div class="col-2 mt-2">
+                                    <label for="dpt">Deparment:</label>
+                                </div>
+                                <div class="col-6 mt-1">
+                                    <select class="custom-select form-control-border" id="dpt" required>
+                                        <option value="" disabled selected>-- Select Department --</option>
+                                        <option value="CET">College of Engineering and Technology</option>
+                                        <option value="CAS">College of Arts and Science</option>
+                                        <option value="CBA">College of Business and Accountancy</option>
+                                        <option value="CoN">College of Nursing</option>
+                                        <option value="CoE">College of Educationn</option>
+                                        <option value="CoL">College of Law</option>
+                                        <option value="CoM">College of Medicine</option>
+                                        <option value="Staff">Staff</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 text-right mt-2">
                                     <button type="button" class="btn btn-success" id="save"> SAVE </button>
                                     <button type="button" class="btn btn-secondary" id="cancelbtn" style="display: none;"> Cancel </button>
                                 </div>

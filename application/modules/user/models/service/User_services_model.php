@@ -43,6 +43,13 @@ class User_services_model extends CI_Model
     public function save()
     {
         try {
+            if (
+                empty($this->fname) || empty($this->lname) || empty($this->email) || empty($this->course) ||
+                empty($this->dpt) || empty($this->cnum) || empty($this->gender) || empty($this->user)
+            ) {
+                throw new Exception(MISSING_DETAILS, true);
+            }
+
             $pw = '123456';
             $locker = locker();
 
@@ -58,6 +65,8 @@ class User_services_model extends CI_Model
                 'locker' => $locker,
                 'sex' => $this->gender,
                 'usertype' => $this->user,
+                'contact_num' => $this->cnum,
+                'dpt' => $this->dpt,
             );
 
             $this->db->trans_start();
@@ -80,7 +89,12 @@ class User_services_model extends CI_Model
     public function update()
     {
         try {
-
+            if (
+                empty($this->fname) || empty($this->lname) || empty($this->email) || empty($this->course) ||
+                empty($this->dpt) || empty($this->cnum) || empty($this->gender) || empty($this->user)
+            ) {
+                throw new Exception(MISSING_DETAILS, true);
+            }
             $data = array(
                 'fname' => $this->fname,
                 'mname' => $this->mname,
@@ -90,6 +104,8 @@ class User_services_model extends CI_Model
                 'yearSection' => $this->course,
                 'sex' => $this->gender,
                 'usertype' => $this->user,
+                'contact_num' => $this->cnum,
+                'dpt' => $this->dpt,
             );
 
             $this->db->trans_start();
@@ -121,6 +137,7 @@ class User_services_model extends CI_Model
             $data = array(
                 'password' => $pw,
                 'locker' => $locker,
+                'active' => 0
             );
 
             $this->db->trans_start();

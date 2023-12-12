@@ -45,6 +45,8 @@ class User_service extends MY_Controller
 		$this->usModel->gender = $this->input->post("gender");
 		$this->usModel->course = $this->input->post("course");
 		$this->usModel->user = $this->input->post("usertype");
+		$this->usModel->cnum = $this->input->post("cnum");
+		$this->usModel->dpt = $this->input->post("dpt");
 
 		$response = $this->usModel->save();
 		echo json_encode($response);
@@ -61,6 +63,8 @@ class User_service extends MY_Controller
 		$this->usModel->gender = $this->input->post("gender");
 		$this->usModel->course = $this->input->post("course");
 		$this->usModel->user = $this->input->post("usertype");
+		$this->usModel->cnum = $this->input->post("cnum");
+		$this->usModel->dpt = $this->input->post("dpt");
 
 		$response = $this->usModel->update();
 		echo json_encode($response);

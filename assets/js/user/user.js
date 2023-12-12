@@ -41,6 +41,8 @@ $("#save").click(function () {
       gender: $("#gender").val(),
       course: $("#course").val(),
       usertype: $("#usertype").val(),
+      dpt: $("#dpt").val(),
+      cnum: $("#cnum").val(),
     },
     success: function (e) {
       var e = JSON.parse(e);
@@ -69,6 +71,9 @@ $(document).on("click", ".edit-btn", function () {
   var uname = $(this).data("uname");
   var email = $(this).data("email");
   var course = $(this).data("course");
+  var dpt = $(this).data("dpt");
+  var cnum = $(this).data("cnum");
+
 
   $("#update").val(id);
   $("#fname").val(fname);
@@ -77,6 +82,8 @@ $(document).on("click", ".edit-btn", function () {
   $("#uname").val(uname);
   $("#email").val(email);
   $("#course").val(course);
+  $("#cnum").val(cnum);
+  $("#dpt").val(dpt);
 
   $("#edit-user").click(function () {
     $.post({
@@ -176,19 +183,15 @@ $("#usertype").change(function () {
   // alert();
   switch ($("#usertype").val()) {
     case "0":
-      console.log("Setting value to empty");
       $("#course").val("");
       break;
     case "1":
-      console.log("Setting value to Counselor");
       $("#course").val("Counselor");
       break;
     case "2":
-      console.log("Setting value to Admin");
       $("#course").val("Admin");
       break;
     case "3":
-      console.log("Setting value to Sec");
       $("#course").val("Secretary");
       break;
   }
@@ -204,7 +207,7 @@ $(document).on("click", ".btn-reset", function () {
     success: function (e) {
       var e = JSON.parse(e);
       if (e.has_error == false) {
-        window.location.reload();
+        // window.location.reload();
       } else {
         alert("error");
       }
