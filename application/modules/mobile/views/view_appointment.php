@@ -132,6 +132,7 @@ main_header(['dashboard']);
                 <button class="btn btn-success p-1 btnUndoC" id="btnUndoC" type="button"><i class="fa fa-undo" style="margin:0%;padding:0%"></i></button>
                 <button class="btn btn-success p-1 " data-toggle="modal" data-target="#modal_cancel_remark"  type="button"><i class="fa fa-ban" style="margin:0%;padding:0%"></i></button>
               </td>
+              <td class="text-center col-5"><?=@$value->Remarks?></td>
             </tr>
               <!-- modal for appointment approval-->
             <div class="modal fade" id="modal_cancel_remark">
