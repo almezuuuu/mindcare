@@ -172,7 +172,7 @@ main_header(['user_mgmt']);
                             <input class="form-control" id="search" placeholder="Type the name or ID number of the student/user...">
                         </div>
                         <div class="col-md-2 col-2 text-center">
-                            <!-- dd here -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-full">View Statistics</button>
                         </div>
                     </div>
                     <table class="table table-striped">
@@ -263,6 +263,28 @@ main_header(['user_mgmt']);
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="modal-full">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">View Full Statistics</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="load_full">
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
 <!-- /.modal -->
 
 <!-- ############ PAGE END-->

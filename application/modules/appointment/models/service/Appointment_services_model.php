@@ -93,9 +93,16 @@ class Appointment_services_model extends CI_Model
     public function update_status()
     {
         try {
+            if (($this->status == 1 && empty($this->remarks)) || ($this->status == 2 && empty($this->remarks))) {
+                throw new Exception(MISSING_DETAILS, true);
+            }
+
+            $remarks = $this->remarks ?? 0;
+
             $status = ($this->status == 1 ? 1 : ($this->status == 0 ? 0 : 2));
             $data = array(
                 'Status' => $status,
+                'Remarks' => $remarks
             );
 
             $this->db->trans_start();
@@ -108,21 +115,21 @@ class Appointment_services_model extends CI_Model
             $notif = $this->session->notif;
 
             // if($status!='Pending'){
-                // echo 'aaaaaaa';
-                $this->db->select('*');
-                $this->db->from($this->Table->user);
-                $this->db->where('Username', $this->session->username);
-                $query = $this->db->get()->row();
-                
-                    $this->db->select('ID');
-                    $this->db->where('counselorID', $query->ID);
-                    $this->db->where('Status', 'Pending');
-                    $this->db->where('DateStatus', null);
-                    $this->db->where('appointer', 0);
-                    $this->db->from($this->Table->appointment);
-                    $notif = $this->db->get()->result();
-                    $query->notif = count($notif);
-                    set_userdata(USER, (array)$query);
+            // echo 'aaaaaaa';
+            $this->db->select('*');
+            $this->db->from($this->Table->user);
+            $this->db->where('Username', $this->session->username);
+            $query = $this->db->get()->row();
+
+            $this->db->select('ID');
+            $this->db->where('counselorID', $query->ID);
+            $this->db->where('Status', 'Pending');
+            $this->db->where('DateStatus', null);
+            $this->db->where('appointer', 0);
+            $this->db->from($this->Table->appointment);
+            $notif = $this->db->get()->result();
+            $query->notif = count($notif);
+            set_userdata(USER, (array)$query);
             // }
 
             if ($this->db->trans_status() === FALSE) {
@@ -130,7 +137,7 @@ class Appointment_services_model extends CI_Model
                 throw new Exception(ERROR_PROCESSING, true);
             } else {
                 $this->db->trans_commit();
-                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false, 'stat' => $status,  'a'=> count($notif));
+                return array('message' => SAVED_SUCCESSFUL, 'has_error' => false, 'stat' => $status,  'a' => count($notif));
             }
         } catch (Exception $msg) {
             return (array('message' => $msg->getMessage(), 'has_error' => true));

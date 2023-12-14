@@ -53,6 +53,7 @@ class Appointment_service extends MY_Controller
 	{
 		$this->asModel->ID = $this->input->post("ID");
 		$this->asModel->status = $this->input->post("status");
+		$this->asModel->remarks = $this->input->post("remarks");
 		$this->asModel->session = $this->session;
 
 		$response = $this->asModel->update_status();

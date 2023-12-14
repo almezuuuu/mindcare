@@ -40,6 +40,41 @@ class User_services_model extends CI_Model
         }
     }
 
+    public function filter_dpt()
+    {
+        try {
+            $this->db->select('um.*');
+            $this->db->join($this->Table->user . ' u', 'um.User = u.ID', 'inner');
+            $this->db->from($this->Table->user_mood . ' um');
+            $this->db->where('u.usertype', 0);
+            if ($this->dpt) {
+                $this->db->where('u.dpt', $this->dpt);
+            }
+            if ($this->yr) {
+                $this->db->where('YEAR(um.DateAdded)', $this->yr);
+            }
+            if ($this->qm) {
+                switch ($this->qm) {
+                    case 'Q1':
+                    case 'Q2':
+                    case 'Q3':
+                    case 'Q4':
+                        $this->db->where('QUARTER(um.DateAdded)', substr($this->qm, 1, 1));
+                        break;
+                    default:
+                        $this->db->where('MONTH(um.DateAdded)', $this->qm);
+                        break;
+                }
+            }
+            echo "qm:" . $this->qm . " yr:" . $this->yr;
+            $query = $this->db->get()->result();
+            // var_dump($query);
+            return $query;
+        } catch (Exception $msg) {
+            return (array('message' => $msg->getMessage(), 'has_error' => true));
+        }
+    }
+
     public function save()
     {
         try {

@@ -10,14 +10,13 @@ class Appointment extends MY_Controller
 		parent::__construct();
 		$this->session = (object)get_userdata(USER);
 
-		if(is_empty_object($this->session)){
-			redirect(base_url().'login/authentication', 'refresh');
+		if (is_empty_object($this->session)) {
+			redirect(base_url() . 'login/authentication', 'refresh');
 		}
-		if($this->session->usertype==0){
-			redirect(base_url().'mobile/index?ID='.$this->session->ID, 'refresh');
-		}
-		else if($this->session->usertype==2){
-			redirect(base_url().'dashboard/index', 'refresh');
+		if ($this->session->usertype == 0) {
+			redirect(base_url() . 'mobile/index?ID=' . $this->session->ID, 'refresh');
+		} else if ($this->session->usertype == 2) {
+			redirect(base_url() . 'dashboard/index', 'refresh');
 		}
 
 		$model_list = [
@@ -41,7 +40,4 @@ class Appointment extends MY_Controller
 		$this->data['content'] = 'index';
 		$this->load->view('layout', $this->data);
 	}
-
-	
-
 }

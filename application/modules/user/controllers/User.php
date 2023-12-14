@@ -62,4 +62,13 @@ class User extends MY_Controller
 		$this->data['content'] = 'grid/load_chart';
 		$this->load->view('layout', $this->data);
 	}
+
+	public function load_full()
+	{
+		// $this->uModel->userID = $this->input->get('ID');
+		$this->data['mood_stat'] = $this->uModel->mood_stat_full();
+		// $this->data['warning'] = $this->uModel->mood_threshold();
+		$this->data['content'] = 'grid/load_full';
+		$this->load->view('layout', $this->data);
+	}
 }

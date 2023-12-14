@@ -1,13 +1,11 @@
 $(document).on("click", "#setAppointment", function () {
   var Date = $("#aDate").val();
   // var Time = $('#aTime').val();
-  var fromTime = $('#aTime').find(':selected').data('from');
-  var toTime = $('#aTime').find(':selected').data('to');
+  var fromTime = $("#aTime").find(":selected").data("from");
+  var toTime = $("#aTime").find(":selected").data("to");
 
   var ID = 5;
- console.log(fromTime +'-'+ toTime);
-
-
+  console.log(fromTime + "-" + toTime);
 
   $.post({
     url: base_url + "mobile/service/Mobile_service/set_appointment",
@@ -19,7 +17,7 @@ $(document).on("click", "#setAppointment", function () {
       toTime: toTime,
       studID: $("#studID").val(),
       counselorID: $("#gCounselor").val(),
-      Status: 0
+      Status: 0,
     },
     success: function (e) {
       var e = JSON.parse(e);
@@ -46,75 +44,100 @@ $(document).on("click", "#setAppointment", function () {
 // Common function for handling actions
 function handleAppointmentAction(ID, status, url, Remarks) {
   $.post({
-      url: base_url + url,
-      data: {
-          ID: ID,
-          Status: status,
-          Remarks: Remarks
-      },
-      success: function (e) {
-          var e = JSON.parse(e);
-          if (e.has_error == false) {
-              if (e.message == "APPOINTMENT IS CANCELLED") {
-                  toastr.error(e.message);
-                //   setTimeout(function () {
-                //     location.href = location.href;
-                // }, 1000);
-                  // Handle specific error message related to appointment cancellation
-              }  else {
-                  toastr.success(e.message);
-                  if (status == 0) {
-                      $('#btnUndo').css('display', 'none');
-                      $('#btnApprove').css('display', 'inline');
-                  } else if (status == 1) {
-                      $('#btnUndo').css('display', 'inline');
-                      $('#btnApprove').css('display', 'none');
-                  }
-                  // Redirect to the current URL after a delay
-                  // setTimeout(function () {
-                  //     location.href = location.href;
-                  // }, 1000);
-              }
-          } else {
-              toastr.error(e.message);
+    url: base_url + url,
+    data: {
+      ID: ID,
+      Status: status,
+      Remarks: Remarks,
+    },
+    success: function (e) {
+      var e = JSON.parse(e);
+      if (e.has_error == false) {
+        if (e.message == "APPOINTMENT IS CANCELLED") {
+          toastr.error(e.message);
+          //   setTimeout(function () {
+          //     location.href = location.href;
+          // }, 1000);
+          // Handle specific error message related to appointment cancellation
+        } else {
+          toastr.success(e.message);
+          if (status == 0) {
+            $("#btnUndo").css("display", "none");
+            $("#btnApprove").css("display", "inline");
+          } else if (status == 1) {
+            $("#btnUndo").css("display", "inline");
+            $("#btnApprove").css("display", "none");
           }
-      },
+          // Redirect to the current URL after a delay
+          // setTimeout(function () {
+          //     location.href = location.href;
+          // }, 1000);
+        }
+      } else {
+        toastr.error(e.message);
+      }
+    },
   });
 }
 
-
 // Click event handler for approve button
 $(document).on("click", ".btnApprove", function () {
-  var appointmentID = $(this).closest('tr').find('.appointmentID').val();
+  var appointmentID = $(this).closest("tr").find(".appointmentID").val();
 
-  handleAppointmentAction(appointmentID, 1, "mobile/service/Mobile_service/approve_appointment");
+  handleAppointmentAction(
+    appointmentID,
+    1,
+    "mobile/service/Mobile_service/approve_appointment"
+  );
 });
 $(document).on("click", ".btnApproveC", function () {
-  var appointmentIDC = $('.appointmentIDC').val();
-  var Remarks = $('#Remarks').val();
+  var appointmentIDC = $(".appointmentIDC").val();
+  var Remarks = $("#Remarks").val();
   console.log(appointmentIDC);
-  handleAppointmentAction(appointmentIDC, 1, "mobile/service/Mobile_service/approve_appointment", Remarks);
+  handleAppointmentAction(
+    appointmentIDC,
+    1,
+    "mobile/service/Mobile_service/approve_appointment",
+    Remarks
+  );
 });
 
 // Click event handler for undo button
 $(document).on("click", ".btnUndo", function () {
-  var appointmentID = $(this).closest('tr').find('.appointmentID').val();
-  handleAppointmentAction(appointmentID, 0, "mobile/service/Mobile_service/set_appointment_pending");
+  var appointmentID = $(this).closest("tr").find(".appointmentID").val();
+  handleAppointmentAction(
+    appointmentID,
+    0,
+    "mobile/service/Mobile_service/set_appointment_pending"
+  );
 });
 // Click event handler for undo button
 $(document).on("click", ".btnUndoC", function () {
-  var appointmentIDC = $(this).closest('tr').find('.appointmentIDC').val();
-  handleAppointmentAction(appointmentIDC, 0, "mobile/service/Mobile_service/set_appointment_pending");
+  var appointmentIDC = $(this).closest("tr").find(".appointmentIDC").val();
+  handleAppointmentAction(
+    appointmentIDC,
+    0,
+    "mobile/service/Mobile_service/set_appointment_pending"
+  );
 });
 
 // Click event handler for cancel button
 $(document).on("click", ".btnCancel", function () {
-  var appointmentID = $(this).closest('tr').find('.appointmentID').val();
-  handleAppointmentAction(appointmentID, 2, "mobile/service/Mobile_service/set_appointment_cancel");
+  var appointmentID = $(this).closest("tr").find(".appointmentID").val();
+  handleAppointmentAction(
+    appointmentID,
+    2,
+    "mobile/service/Mobile_service/set_appointment_cancel"
+  );
 });
 // Click event handler for cancel button
 $(document).on("click", ".btnCancelC", function () {
-  var appointmentIDC = $('.appointmentIDC').val();
-  var Remarks = $('#Remarks').val();
-  handleAppointmentAction(appointmentIDC, 2, "mobile/service/Mobile_service/set_appointment_cancel", Remarks);
+  var appointmentIDC = $(".appointmentIDC").val();
+  var Remarks = $("#Remarks").val();
+  handleAppointmentAction(
+    appointmentIDC,
+    2,
+    "mobile/service/Mobile_service/set_appointment_cancel",
+    Remarks
+  );
 });

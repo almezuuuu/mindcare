@@ -1,6 +1,7 @@
 $(document).ready(function () {
   load_students();
   load_staff();
+  load_full();
 });
 
 var load_students = () => {
@@ -17,6 +18,13 @@ var load_staff = () => {
   });
 };
 
+var load_full = () => {
+  $(document).gmLoadPage({
+    url: "user/load_full",
+    load_on: "#load_full",
+  });
+};
+
 $("#search").change(function () {
   $.post({
     url: "user/service/User_service/search",
@@ -28,6 +36,35 @@ $("#search").change(function () {
     },
   });
 });
+
+// $(document).on("change", "#filterdpt", function () {
+//   // alert();
+//   $.post({
+//     url: "user/service/User_service/filter_dpt",
+//     data: {
+//       dpt: $(this).val(),
+//     },
+//     success: function (response) {
+//       $("#load_full").html(response);
+//     },
+//   });
+// });
+
+$(document).on("click", "#btn-filter", function () {
+  // alert();
+  $.post({
+    url: "user/service/User_service/filter_dpt",
+    data: {
+      dpt: $('#filterdpt').val(),
+      qm: $('#qm').val(),
+      yr: $('#yr').val(),
+    },
+    success: function (response) {
+      $("#load_full").html(response);
+    },
+  });
+});
+
 
 $("#save").click(function () {
   $.post({
@@ -73,7 +110,6 @@ $(document).on("click", ".edit-btn", function () {
   var course = $(this).data("course");
   var dpt = $(this).data("dpt");
   var cnum = $(this).data("cnum");
-
 
   $("#update").val(id);
   $("#fname").val(fname);

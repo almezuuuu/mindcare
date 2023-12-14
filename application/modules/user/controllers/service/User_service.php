@@ -35,6 +35,19 @@ class User_service extends MY_Controller
 		$this->load->view('layout', $this->data);
 	}
 
+	public function filter_dpt()
+	{
+		$this->usModel->dpt = $this->input->post("dpt");
+		$this->usModel->qm = $this->input->post("qm");
+		$this->usModel->yr = $this->input->post("yr");
+
+		$query = $this->usModel->filter_dpt();
+		$this->data['session'] =  $this->session;
+		$this->data['mood_stat'] = $query;
+		$this->data['content'] = 'grid/load_full';
+		$this->load->view('layout', $this->data);
+	}
+
 	public function save()
 	{
 		$this->usModel->fname = $this->input->post("fname");

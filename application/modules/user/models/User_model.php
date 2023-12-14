@@ -44,6 +44,15 @@ class User_model extends CI_Model
         return $query;
     }
 
+    public function mood_stat_full()
+    {
+        $this->db->select('um.*');
+        // $this->db->where('um.User', $this->userID);
+        $this->db->from($this->Table->user_mood . ' um');
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
     public function mood_threshold()
     {
         $this->db->select('SUM(um.Points) as totalPoints');
